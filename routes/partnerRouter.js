@@ -39,11 +39,11 @@ partnerRouter.route('/')
 
 partnerRouter.route('/:partnerId')
 .get((req, res, next) => {
-    Campsite.findById(req.params.campsiteId)
-    .then(campsite => {
+    Partner.findById(req.params.partnerId)
+    .then(partner => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(campsite);
+        res.json(partner);
     })
     .catch(err => next(err));
 })
@@ -52,7 +52,7 @@ partnerRouter.route('/:partnerId')
     res.end(`POST operation not supported on /partners/${req.params.partnerId}`);
 })
 .put((req, res, next) => {
-    Campsite.findByIdAndUpdate(req.params.partnerId, {
+    Partner.findByIdAndUpdate(req.params.partnerId, {
         $set: req.body
     }, { new: true })
     .then(partner => {
